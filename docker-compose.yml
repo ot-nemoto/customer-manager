@@ -18,3 +18,5 @@ services:
     - ./:/customer-manager
     working_dir: /customer-manager
     command: python manage.py runserver 0.0.0.0:80
+    depends_on:
+    - db
