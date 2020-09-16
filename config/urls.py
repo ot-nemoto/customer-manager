@@ -14,11 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.conf.urls import url
+from django.urls import path, include
+from django.conf.urls import url, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from api.v1.companies.urls import router as companies_router
+from api.v1.persons.urls import router as persons_router
+from api.v1.sections.urls import router as sections_router
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -38,4 +41,8 @@ urlpatterns = [
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
+    url(r'api/v1/companies/', include(companies_router.urls)),
+    url(r'api/v1/persons/', include(persons_router.urls)),
+    url(r'api/v1/sections/', include(sections_router.urls)),
 ]
