@@ -9,6 +9,7 @@ services:
     - /mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
+      TZ: 'Asia/Tokyo'
   app:
     build:
       context: docker/app
