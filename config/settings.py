@@ -39,9 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'api.v1.companies.apps.CompaniesConfig',
-    'api.v1.persons.apps.PersonsConfig',
-    'api.v1.sections.apps.SectionsConfig',
+    'api.v1.customers.apps.CustomersConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +78,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'db',
         'NAME': 'customer_manager',
