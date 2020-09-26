@@ -11,13 +11,13 @@ def index(request):
     return render(request, 'index.html', {})
 
 def companies(request):
-    page_num = request.GET.get('page') or 1
-    index = request.GET.get('index')
+    page_num = request.GET.get('page_num') or 1
+    index_name = request.GET.get('index_name')
     companies = Company.objects.order_by('-update_date')
-    if index is not None:
-        companies = companies.filter(index_name=index)
+    if index_name is not None:
+        companies = companies.filter(index_name=index_name)
     context = {
-        'query_dict': request.GET,
+        'index_name': index_name,
         'companies': Paginator(companies, 50).page(page_num),
         'index_name_choices': Company.INDEX_NAME_CHOICES,
     }
