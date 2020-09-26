@@ -18,3 +18,7 @@ pwd
   # /customer-manager
 python manage.py migrate
 ```
+
+### ref
+
+https://utamaro.hatenablog.jp/entry/2018/10/21/102148

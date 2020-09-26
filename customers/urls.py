@@ -7,3 +7,10 @@ router = routers.DefaultRouter()
 router.register(r'companies', CompanyViewSet)
 router.register(r'sections', SectionViewSet)
 router.register(r'persons', PersonViewSet)
+
+app_name = 'customers'
+urlpatterns = [
+    path('', views.index, name="index"),
+    path('companies/', views.companies, name="companies"),
+    path('persons/', views.persons, name="persons"),
+]

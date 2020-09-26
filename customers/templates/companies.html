@@ -1,0 +1,55 @@
+<h1>顧客</h1>
+
+{% load customer_extras %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">会社名</th>
+      <th scope="col">電話 / FAX</th>
+      <th scope="col">メールアドレス</th>
+      <th scope="col">住所</th>
+      <th scope="col">備考</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for company in companies.object_list %}
+    <tr>
+      <th rowspan="3" scope="row">編集</th>
+      <th rowspan="3" scope="col">{{ company.name }}</th>
+      <th scope="col">{{ company.telephone_number_1 }}</th>
+      <th rowspan="3" scope="col">{{ company.mail_address }}</th>
+      <th rowspan="3" scope="col">{{ company.address | linebreaksbr }}</th>
+      <th rowspan="3" scope="col">{{ company.note | linebreaksbr }}</th>
+    </tr>
+    <tr>
+      <th scope="col">{{ company.telephone_number_2 }}</th>
+    </tr>
+    <tr>
+      <th scope="col">{{ company.fax_number }}</th>
+    </tr>
+{% endfor %}
+  </tbody>
+</body>
+
+{% if companies.has_previous %}
+<a href="?page={{ companies.previous_page_number }}">前へ</a>
+{% else %}
+<p>前へ</p>
+{% endif %}
+
+{% if companies.has_next %}
+<a href="?page={{ companies.next_page_number }}">次へ</a>
+{% else %}
+<p>次へ</p>
+{% endif %}
+
+{% for index_name in index_name_choices %}
+<a href="?index={{ index_name.0 }}">{{ index_name.1 }}</a>
+{% endfor %}
+
+<a href="{{ request.get_full_path }}">aaa</a>
+<p>{{ request.path_info }}</p>
+{{ query_dict }}
+<p>{% query_transform request p=1 %}</p>

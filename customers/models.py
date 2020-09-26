@@ -39,6 +39,16 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
+    def address(self):
+        add1 = []
+        if self.zip_code is not None: add1.append(self.zip_code)
+        if self.address_1 is not None: add1.append(self.address_1) 
+        if self.address_2 is not None: add1.append(self.address_2) 
+        add2 = []
+        if len(add1) > 0: add2.append(" ".join(add1))
+        if self.address_3 is not None: add2.append(self.address_3)
+        return "\n".join(add2)
+
 class Section(models.Model):
     company = models.ForeignKey(Company,on_delete=models.PROTECT)
     name = models.CharField(max_length=255)
