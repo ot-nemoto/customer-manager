@@ -34,21 +34,26 @@
 </body>
 
 {% if companies.has_previous %}
-<a href="{{ request.path_info }}?{% query_transform request page_num=companies.previous_page_number %}">前へ</a>
+<a href="{{ request.path_info }}?{% query_transform request p=companies.previous_page_number %}">前へ</a>
 {% else %}
 <p>前へ</p>
 {% endif %}
 
 {% if companies.has_next %}
-<a href="{{ request.path_info }}?{% query_transform request page_num=companies.next_page_number %}">次へ</a>
+<a href="{{ request.path_info }}?{% query_transform request p=companies.next_page_number %}">次へ</a>
 {% else %}
 <p>次へ</p>
 {% endif %}
 
-{% for i in index_name_choices %}
-{% if i.0|slugify == index_name %}
-<div>{{ i.1 }}</div>
+{% for index_name in index_name_choices %}
+{% if index_name.0|slugify == request.GET.i %}
+<div>{{ index_name.1 }}</div>
 {% else %}
-<a href="{{ request.path_info }}?index_name={{ i.0 }}">{{ i.1 }}</a>
+<a href="{{ request.path_info }}?i={{ index_name.0 }}">{{ index_name.1 }}</a>
 {% endif %}
 {% endfor %}
+
+<form action="{{ request.path_info }}" method="GET">
+  <input name="q" value="{{ request.GET.q }}">
+  <input type="submit" value="検索">
+</form>

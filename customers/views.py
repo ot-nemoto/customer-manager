@@ -6,18 +6,21 @@ from .serializer import CompanySerializer, SectionSerializer, PersonSerializer
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 def index(request):
     return render(request, 'index.html', {})
 
 def companies(request):
-    page_num = request.GET.get('page_num') or 1
-    index_name = request.GET.get('index_name')
+    page_num = request.GET.get('p') or 1
+    index_name = request.GET.get('i')
+    search = request.GET.get('q')
     companies = Company.objects.order_by('-update_date')
     if index_name is not None:
         companies = companies.filter(index_name=index_name)
+    if search is not None:
+        companies = companies.filter(Q(name__icontains=search)|Q(search_name__icontains=search))
     context = {
-        'index_name': index_name,
         'companies': Paginator(companies, 50).page(page_num),
         'index_name_choices': Company.INDEX_NAME_CHOICES,
     }
