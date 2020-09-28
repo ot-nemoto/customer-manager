@@ -26,6 +26,12 @@ def companies(request):
     }
     return render(request, 'companies.html', context)
 
+def company(request, id):
+    context = {
+        'company': Company.objects.get(id=id),
+    }
+    return render(request, 'company.html', context)
+
 def persons(request):
     return HttpResponse("persons")
 

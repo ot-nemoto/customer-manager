@@ -17,17 +17,17 @@
 {% for company in companies.object_list %}
     <tr>
       <th rowspan="3" scope="row">編集</th>
-      <th rowspan="3" scope="col">{{ company.name }}</th>
-      <th scope="col"><p>{{ company.telephone_number_1|default_if_none:"" }}</p></th>
-      <th rowspan="3" scope="col"><p>{{ company.mail_address|default_if_none:"" }}</p></th>
-      <th rowspan="3" scope="col">{{ company.address | linebreaksbr }}</th>
-      <th rowspan="3" scope="col">{{ company.note | linebreaksbr }}</th>
+      <th rowspan="3" scope="col"><a href="{% url 'customers:company' company.id %}">{{ company.name }}</a></th>
+      <th scope="col"><p>{{ company.telephone_number_1 |default_if_none:"" }}</p></th>
+      <th rowspan="3" scope="col"><p>{{ company.mail_address |default_if_none:"" }}</p></th>
+      <th rowspan="3" scope="col">{{ company.address |linebreaksbr }}</th>
+      <th rowspan="3" scope="col">{{ company.note |truncatechars_html:80 |linebreaksbr }}</th>
     </tr>
     <tr>
-      <th scope="col"><p>{{ company.telephone_number_2|default_if_none:"" }}</p></th>
+      <th scope="col"><p>{{ company.telephone_number_2 |default_if_none:"" }}</p></th>
     </tr>
     <tr>
-      <th scope="col"><p>{{ company.fax_number|default_if_none:"" }}</p></th>
+      <th scope="col"><p>{{ company.fax_number |default_if_none:"" }}</p></th>
     </tr>
 {% endfor %}
   </tbody>

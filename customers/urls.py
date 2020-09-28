@@ -12,5 +12,6 @@ app_name = 'customers'
 urlpatterns = [
     path('', views.index, name="index"),
     path('companies/', views.companies, name="companies"),
+    path('companies/<int:id>/', views.company, name="company"),
     path('persons/', views.persons, name="persons"),
 ]
