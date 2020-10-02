@@ -29,6 +29,8 @@ def companies(request):
 def company(request, id):
     context = {
         'company': Company.objects.get(id=id),
+        'sections': Section.objects.filter(company_id=id),
+        'persons': Person.objects.filter(company_id=id),
     }
     return render(request, 'company.html', context)
 

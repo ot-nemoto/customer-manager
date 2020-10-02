@@ -1,3 +1,88 @@
-<h1>顧客</h1>
+<h1>会社情報</h1>
 
-{{ company }}
+<table>
+  <tbody>
+    <tr>
+      <td>会社名</td>
+      <td>{{ company.name }}</td>
+    </tr>
+    <tr>
+      <td>略称</td>
+      <td>{{ company.short_name |default_if_none:"" }}</td>
+    </tr>
+    <tr>
+      <td>頭文字</td>
+      <td>{{ company.get_index_name_display }}</td>
+    </tr>
+    <tr>
+      <td>住所</td>
+      <td>{{ company.address |linebreaksbr }}</td>
+    </tr>
+    <tr>
+      <td>電話番号</td>
+      <td>{{ company.telephone_number_1 |default_if_none:"" }}<br>{{ company.telephone_number_2 |default_if_none:"" }}</td>
+    </tr>
+    <tr>
+      <td>FAX番号</td>
+      <td>{{ company.fax_number |default_if_none:"" }}</td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td>{{ company.mail_address |default_if_none:"" }}</td>
+    </tr>
+    <tr>
+      <td>備考</td>
+      <td><textarea readonly>{{ company.note }}</textarea></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>部署一覧</h2>
+
+<table>
+  <thead>
+    <tr>
+      <td>No</td>
+      <td>部署名</td>
+      <td>電話番号</td>
+      <td>FAX番号</td>
+      <td>メールアドレス</td>
+    </tr>
+  </thead>
+  <tbody>
+{% for section in sections %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ section.name }}</td>
+      <td>{{ section.telephone_number_1 |default_if_none:"" }}<br>{{ section.telephone_number_2 |default_if_none:"" }}</td>
+      <td>{{ section.fax_number |default_if_none:"" }}</td>
+      <td>{{ section.mail_address |default_if_none:"" }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+<h2>担当者一覧</h2>
+
+<table>
+  <thead>
+    <tr>
+      <td>No</td>
+      <td>担当者名</td>
+      <td>電話番号</td>
+      <td>FAX番号</td>
+      <td>メールアドレス</td>
+    </tr>
+  </thead>
+  <tbody>
+{% for person in persons %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ person.name }}</td>
+      <td>{{ person.telephone_number_1 |default_if_none:"" }}<br>{{ person.telephone_number_2 |default_if_none:"" }}</td>
+      <td>{{ person.fax_number |default_if_none:"" }}</td>
+      <td>{{ person.mail_address |default_if_none:"" }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
