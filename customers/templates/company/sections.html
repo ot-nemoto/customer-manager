@@ -1,0 +1,24 @@
+部署一覧
+
+<table>
+  <thead>
+    <tr>
+      <td>No</td>
+      <td>部署名</td>
+      <td>電話番号</td>
+      <td>FAX番号</td>
+      <td>メールアドレス</td>
+    </tr>
+  </thead>
+  <tbody>
+{% for section in sections %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ section.name }}</td>
+      <td>{{ section.telephone_number_1 |default_if_none:"" }}<br>{{ section.telephone_number_2 |default_if_none:"" }}</td>
+      <td>{{ section.fax_number |default_if_none:"" }}</td>
+      <td>{{ section.mail_address |default_if_none:"" }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>

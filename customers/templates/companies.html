@@ -17,7 +17,7 @@
 {% for company in companies.object_list %}
     <tr>
       <th rowspan="3" scope="row">編集</th>
-      <th rowspan="3" scope="col"><a href="{% url 'customers:company' company.id %}">{{ company.name }}</a></th>
+      <th rowspan="3" scope="col"><a href="{% url 'customers:company_detail' company.id %}">{{ company.name }}</a></th>
       <th scope="col"><p>{{ company.telephone_number_1 |default_if_none:"" }}</p></th>
       <th rowspan="3" scope="col"><p>{{ company.mail_address |default_if_none:"" }}</p></th>
       <th rowspan="3" scope="col">{{ company.address |linebreaksbr }}</th>

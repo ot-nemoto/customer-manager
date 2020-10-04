@@ -1,0 +1,52 @@
+<table>
+  <tbody>
+    <tr>
+      <td>会社名</td>
+      <td>{{ company.name }}</td>
+    </tr>
+    <tr>
+      <td>略称</td>
+      <td>{{ company.short_name |default_if_none:"" }}</td>
+    </tr>
+    <tr>
+      <td>頭文字</td>
+      <td>{{ company.get_index_name_display }}</td>
+    </tr>
+    <tr>
+      <td>郵便番号</td>
+      <td>{{ company.zip_code |default_if_none:"" }}</td>
+    </tr>
+    <tr>
+      <td>住所</td>
+      <td>
+        <div>{{ company.address_1 |linebreaksbr }}</div>
+        <div>{{ company.address_2 |linebreaksbr }}</div>
+        <div>{{ company.address_3 |linebreaksbr }}</div>
+      </td>
+    </tr>
+    <tr>
+      <td>電話番号</td>
+      <td>
+        <div>{{ company.telephone_number_1 |default_if_none:"" }}</div>
+        <div>{{ company.telephone_number_2 |default_if_none:"" }}</div>
+    </tr>
+    <tr>
+      <td>FAX番号</td>
+      <td>{{ company.fax_number |default_if_none:"" }}</td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td>{{ company.mail_address |default_if_none:"" }}</td>
+    </tr>
+    <tr>
+      <td>備考</td>
+      <td>
+        <div>{{ company.note | linebreaksbr }}</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<form action="{% url 'customers:company_update' company.id %}" method="GET">
+  <input type="submit" value="編集">
+</form>

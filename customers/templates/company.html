@@ -1,5 +1,9 @@
 <h1>会社情報</h1>
 
+<form action="{% url 'customers:edit_company' company.id %}" method="GET">
+  <input type="submit" value="編集">
+</form>
+
 <table>
   <tbody>
     <tr>

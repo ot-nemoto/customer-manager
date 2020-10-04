@@ -1,0 +1,10 @@
+<form method="POST">
+{% csrf_token %}
+  <table>
+{{ form.as_table }}
+  </table>
+  <input type="submit" value="保存">
+</form>
+
+{% include 'company/sections.html' %}
+{% include 'company/persons.html' %}
