@@ -2,7 +2,6 @@ from django.db import models
 
 class Company(models.Model):
     INDEX_NAME_CHOICES = (
-        ( 0, 'その他'),
         ( 1, 'あ行'),
         ( 2, 'か行'),
         ( 3, 'さ行'),
@@ -13,20 +12,21 @@ class Company(models.Model):
         ( 8, 'や行'),
         ( 9, 'ら行'),
         (10, 'わ行'),
+        ( 0, 'その他'),
     )
-    name = models.CharField(max_length=255)
+    name = models.CharField('会社名',max_length=255)
     search_name = models.CharField(max_length=255,null=True)
-    short_name = models.CharField(max_length=255,null=True)
-    index_name = models.SmallIntegerField(choices=INDEX_NAME_CHOICES)
-    zip_code = models.CharField(max_length=255,null=True)
-    address_1 = models.CharField(max_length=255,null=True)
-    address_2 = models.CharField(max_length=255,null=True)
-    address_3 = models.TextField()
-    telephone_number_1 = models.CharField(max_length=255,null=True)
-    telephone_number_2 = models.CharField(max_length=255,null=True)
-    fax_number = models.CharField(max_length=255,null=True)
-    mail_address = models.CharField(max_length=255,null=True)
-    note = models.TextField()
+    short_name = models.CharField('略称',max_length=255,null=True,blank=True)
+    index_name = models.SmallIntegerField('頭文字',choices=INDEX_NAME_CHOICES,default=1)
+    zip_code = models.CharField('郵便番号',max_length=255,null=True,blank=True)
+    address_1 = models.CharField('住所',max_length=255,null=True,blank=True)
+    address_2 = models.CharField('',max_length=255,null=True,blank=True)
+    address_3 = models.TextField('',null=True,blank=True)
+    telephone_number_1 = models.CharField('電話番号',max_length=255,null=True,blank=True)
+    telephone_number_2 = models.CharField('',max_length=255,null=True,blank=True)
+    fax_number = models.CharField('FAX番号',max_length=255,null=True,blank=True)
+    mail_address = models.CharField('メールアドレス',max_length=255,null=True,blank=True)
+    note = models.TextField('備考',null=True,blank=True)
     delete_flg = models.BooleanField(default=False)
     create_user = models.CharField(max_length=255)
     create_date = models.DateTimeField(auto_now_add=True)

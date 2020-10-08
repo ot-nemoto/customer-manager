@@ -69,32 +69,6 @@ class CompanyUpdate(UpdateView):
     def get_success_url(self):
         return reverse('customers:company_detail', kwargs={'pk': self.object.pk})
 
-    def get_form(self):
-        form = super(CompanyUpdate, self).get_form()
-        form.fields['name'].label = '会社名'
-        form.fields['short_name'].label = '略称'
-        form.fields['short_name'].required = False
-        form.fields['index_name'].label = '頭文字'
-        form.fields['zip_code'].label = '郵便番号'
-        form.fields['zip_code'].required = False
-        form.fields['address_1'].label = '住所'
-        form.fields['address_1'].required = False
-        form.fields['address_2'].label = ''
-        form.fields['address_2'].required = False
-        form.fields['address_3'].label = ''
-        form.fields['address_3'].required = False
-        form.fields['telephone_number_1'].label = '電話番号'
-        form.fields['telephone_number_1'].required = False
-        form.fields['telephone_number_2'].label = ''
-        form.fields['telephone_number_2'].required = False
-        form.fields['fax_number'].label = 'FAX番号'
-        form.fields['fax_number'].required = False
-        form.fields['mail_address'].label = 'メールアドレス'
-        form.fields['mail_address'].required = False
-        form.fields['note'].label = '備考'
-        form.fields['note'].required = False
-        return form
-
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['sections'] = Section.objects.filter(company_id=self.kwargs['pk'])

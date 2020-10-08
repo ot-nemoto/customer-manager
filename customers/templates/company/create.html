@@ -1,10 +1,7 @@
-{{ form }}
-
-<table>
+<form method="POST">
+{% csrf_token %}
+  <table>
 {{ form.as_table }}
-</table>
-
-
-<div>
-{{ self.object.name }}
-</div>
+  </table>
+  <input type="submit" value="保存">
+</form>
