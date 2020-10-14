@@ -14,7 +14,7 @@
 {% for person in persons %}
     <tr>
       <td>{{ forloop.counter }}</td>
-      <td>{{ person.name }}</td>
+      <td><a href="{% url 'customers:person_detail' person.id %}">{{ person.name }}</a></td>
       <td>{{ person.telephone_number_1 |default_if_none:"" }}<br>{{ person.telephone_number_2 |default_if_none:"" }}</td>
       <td>{{ person.fax_number |default_if_none:"" }}</td>
       <td>{{ person.mail_address |default_if_none:"" }}</td>

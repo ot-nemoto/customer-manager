@@ -50,3 +50,6 @@
 <form action="{% url 'customers:company_update' company.id %}" method="GET">
   <input type="submit" value="編集">
 </form>
+
+{% include 'company/sections.html' %}
+{% include 'company/persons.html' %}

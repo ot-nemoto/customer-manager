@@ -14,7 +14,7 @@
 {% for section in sections %}
     <tr>
       <td>{{ forloop.counter }}</td>
-      <td>{{ section.name }}</td>
+      <td><a href="{% url 'customers:section_detail' section.id %}">{{ section.name }}</a></td>
       <td>{{ section.telephone_number_1 |default_if_none:"" }}<br>{{ section.telephone_number_2 |default_if_none:"" }}</td>
       <td>{{ section.fax_number |default_if_none:"" }}</td>
       <td>{{ section.mail_address |default_if_none:"" }}</td>

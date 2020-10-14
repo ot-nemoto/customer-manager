@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST">
+{% csrf_token %}
+  <table>
+{{ form.as_table }}
+  </table>
+  <input type="submit" value="保存">
+</form>
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $("#id_company").change(function () {
+    $.ajax({
+      url: "{% url 'customers:section_list' %}",
+      data: {
+        'company_id': $(this).val()
+      },
+      dataType: 'json',
+      success: function (data) {
+        $select = $('select#id_section');
+        $select.children().remove();
+        $select.append($("<option></option>").text('---------'));
+        $.each(data.sections, (index, section)=> {
+          $select.append($("<option></option>").val(section.id).text(section.name));
+        });
+      }
+    });
+  });
+</script>
+{% endblock %}
