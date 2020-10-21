@@ -6,95 +6,97 @@
   <tbody>
     <tr>
       <td>会社名</td>
-      <td>{{ company.name }}</td>
+      <td>{{ person.company.name }}</td>
     </tr>
     <tr>
       <td>略称</td>
-      <td>{{ company.short_name |default_if_none:"" }}</td>
+      <td>{{ person.company.short_name |default_if_none:"" }}</td>
     </tr>
     <tr>
       <td>頭文字</td>
-      <td>{{ company.get_index_name_display }}</td>
+      <td>{{ person.company.get_index_name_display }}</td>
     </tr>
     <tr>
       <td>郵便番号</td>
-      <td>{{ company.zip_code |default_if_none:"" }}</td>
+      <td>{{ person.company.zip_code |default_if_none:"" }}</td>
     </tr>
     <tr>
       <td>住所</td>
       <td>
-        <div>{{ company.address_1 |default_if_none:"" }}</div>
-        <div>{{ company.address_2 |default_if_none:"" }}</div>
-        <div>{{ company.address_3 |default_if_none:"" |linebreaksbr }}</div>
+        <div>{{ person.company.address_1 |default_if_none:"" }}</div>
+        <div>{{ person.company.address_2 |default_if_none:"" }}</div>
+        <div>{{ person.company.address_3 |default_if_none:"" |linebreaksbr }}</div>
       </td>
     </tr>
     <tr>
       <td>電話番号</td>
       <td>
-        <div>{{ company.telephone_number_1 |default_if_none:"" }}</div>
-        <div>{{ company.telephone_number_2 |default_if_none:"" }}</div>
+        <div>{{ person.company.telephone_number_1 |default_if_none:"" }}</div>
+        <div>{{ person.company.telephone_number_2 |default_if_none:"" }}</div>
     </tr>
     <tr>
       <td>FAX番号</td>
-      <td>{{ company.fax_number |default_if_none:"" }}</td>
+      <td>{{ person.company.fax_number |default_if_none:"" }}</td>
     </tr>
     <tr>
       <td>メールアドレス</td>
-      <td>{{ company.mail_address |default_if_none:"" }}</td>
+      <td>{{ person.company.mail_address |default_if_none:"" }}</td>
     </tr>
     <tr>
       <td>備考</td>
       <td>
-        <div>{{ company.note | linebreaksbr }}</div>
+        <div>{{ person.company.note | linebreaksbr }}</div>
       </td>
     </tr>
   </tbody>
 </table>
 
-<form action="{% url 'customers:section_update' section.id %}" method="GET">
+<form action="{% url 'customers:person_update' person.id %}" method="GET">
   <input type="submit" value="編集">
 </form>
 
+{% if person.section is not None %}
 <table>
   <tbody>
     <tr>
       <td>部署名</td>
-      <td>{{ section.name }}</td>
+      <td>{{ person.section.name }}</td>
     </tr>
     <tr>
       <td>郵便番号</td>
-      <td>{{ section.zip_code |default_if_none:"" }}</td>
+      <td>{{ person.section.zip_code |default_if_none:"" }}</td>
     </tr>
     <tr>
       <td>住所</td>
       <td>
-        <div>{{ section.address_1 |default_if_none:"" }}</div>
-        <div>{{ section.address_2 |default_if_none:"" }}</div>
-        <div>{{ section.address_3 |default_if_none:"" |linebreaksbr }}</div>
+        <div>{{ person.section.address_1 |default_if_none:"" }}</div>
+        <div>{{ person.section.address_2 |default_if_none:"" }}</div>
+        <div>{{ person.section.address_3 |default_if_none:"" |linebreaksbr }}</div>
       </td>
     </tr>
     <tr>
       <td>電話番号</td>
       <td>
-        <div>{{ section.telephone_number_1 |default_if_none:"" }}</div>
-        <div>{{ section.telephone_number_2 |default_if_none:"" }}</div>
+        <div>{{ person.section.telephone_number_1 |default_if_none:"" }}</div>
+        <div>{{ person.section.telephone_number_2 |default_if_none:"" }}</div>
     </tr>
     <tr>
       <td>FAX番号</td>
-      <td>{{ section.fax_number |default_if_none:"" }}</td>
+      <td>{{ person.section.fax_number |default_if_none:"" }}</td>
     </tr>
     <tr>
       <td>メールアドレス</td>
-      <td>{{ section.mail_address |default_if_none:"" }}</td>
+      <td>{{ person.section.mail_address |default_if_none:"" }}</td>
     </tr>
     <tr>
       <td>備考</td>
       <td>
-        <div>{{ section.note | linebreaksbr }}</div>
+        <div>{{ person.section.note | linebreaksbr }}</div>
       </td>
     </tr>
   </tbody>
 </table>
+{% endif %}
 
 担当者一覧
 
@@ -116,6 +118,7 @@
       <td>{{ person.telephone_number_1 |default_if_none:"" }}<br>{{ person.telephone_number_2 |default_if_none:"" }}</td>
       <td>{{ person.fax_number |default_if_none:"" }}</td>
       <td>{{ person.mail_address |default_if_none:"" }}</td>
+      <td>{{ person.section |default_if_none:"" }}</td>
     </tr>
   </tbody>
 </table>

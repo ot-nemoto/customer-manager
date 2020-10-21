@@ -22,7 +22,7 @@
       success: function (data) {
         $select = $('select#id_section');
         $select.children().remove();
-        $select.append($("<option></option>").text('---------'));
+        $select.append($("<option></option>").val(null).text('---------'));
         $.each(data.sections, (index, section)=> {
           $select.append($("<option></option>").val(section.id).text(section.name));
         });

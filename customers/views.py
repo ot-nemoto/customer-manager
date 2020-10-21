@@ -103,7 +103,6 @@ class SectionDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['company'] = Company.objects.get(id=ctx.get("object").company_id)
         ctx['persons'] = Person.objects.filter(section_id=self.kwargs['pk'])
         return ctx
 
@@ -125,19 +124,12 @@ class SectionUpdate(UpdateView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['company'] = Company.objects.get(id=ctx.get("object").company_id)
         ctx['persons'] = Person.objects.filter(section_id=self.kwargs['pk'])
         return ctx
 
 class PersonDetail(DetailView):
     model = Person
     template_name = "person/detail.html"
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx['company'] = Company.objects.get(id=ctx.get("object").company_id)
-        ctx['section'] = Section.objects.get(id=ctx.get("object").section_id)
-        return ctx
 
 class PersonCreate(CreateView):
     model = Person
@@ -154,9 +146,3 @@ class PersonUpdate(UpdateView):
 
     def get_success_url(self):
         return reverse('customers:person_detail', kwargs={'pk': self.object.pk})
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx['company'] = Company.objects.get(id=ctx.get("object").company_id)
-        ctx['section'] = Section.objects.get(id=ctx.get("object").section_id)
-        return ctx
