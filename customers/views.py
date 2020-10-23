@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 
 from .forms import CompanyForm, SectionForm, PersonForm
-from django.views.generic import DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse
 from django.http import JsonResponse
 import json
@@ -64,6 +64,22 @@ class PersonViewSet(viewsets.ModelViewSet):
 
 
 
+class CompanyList(ListView):
+    model = Company
+    template_name = "company/list.html"
+    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['index_name_choices'] = Company.INDEX_NAME_CHOICES
+        ctx['index_name'] = self.kwargs.get('index_name')
+        return ctx
+
+    def get_queryset(self):
+        queryset = Company.objects.order_by('-update_date')
+        if self.kwargs.get('index_name'):
+            queryset = queryset.filter(index_name=self.kwargs.get('index_name'))
+        return queryset
 
 class CompanyDetail(DetailView):
     model = Company
