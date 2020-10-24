@@ -14,6 +14,7 @@ from django.urls import reverse
 from django.http import JsonResponse
 import json
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -79,6 +80,9 @@ class CompanyList(ListView):
         queryset = Company.objects.order_by('-update_date')
         if self.kwargs.get('index_name'):
             queryset = queryset.filter(index_name=self.kwargs.get('index_name'))
+        if self.request.GET.get('query') is not None:
+            for query in re.split('[\s　]', self.request.GET.get('query')):
+                queryset = queryset.filter(Q(name__icontains=query)|Q(search_name__icontains=query))
         return queryset
 
 class CompanyDetail(DetailView):
