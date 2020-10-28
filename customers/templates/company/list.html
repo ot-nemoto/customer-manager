@@ -1,4 +1,7 @@
-<h1>顧客</h1>
+{% extends "base.html" %}
+
+{% block content %}
+<h1>会社一覧</h1>
 
 {% load customer_extras %}
 
@@ -16,7 +19,7 @@
   <tbody>
 {% for company in object_list %}
     <tr>
-      <th rowspan="3" scope="row">編集</th>
+      <th rowspan="3" scope="row"><a href="{% url 'customers:company_update' company.id %}">編集</a></th>
       <th rowspan="3" scope="col"><a href="{% url 'customers:company_detail' company.id %}">{{ company.name }}</a></th>
       <th scope="col"><p>{{ company.telephone_number_1 |default_if_none:"" }}</p></th>
       <th rowspan="3" scope="col"><p>{{ company.mail_address |default_if_none:"" }}</p></th>
@@ -74,3 +77,4 @@
   <input name="query" value="{{ request.GET.query }}">
   <input type="submit" value="検索">
 </form>
+{% endblock %}

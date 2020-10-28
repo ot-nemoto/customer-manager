@@ -2,6 +2,10 @@
   <head>
   </head>
   <body>
+    <a href="{% url 'customers:company_list' %}">会社を検索する</a>
+    <a href="{% url 'customers:person_list' %}">担当者を検索する</a>
+    <a href="{% url 'customers:company_create' %}">会社を登録する</a>
+    <a href="{% url 'customers:person_create' %}">担当者を登録する</a>
     {% block content %}{% endblock %}
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     {% block javascript %}{% endblock %}

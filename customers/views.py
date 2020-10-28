@@ -147,6 +147,18 @@ class SectionUpdate(UpdateView):
         ctx['persons'] = Person.objects.filter(section_id=self.kwargs['pk'])
         return ctx
 
+class PersonList(ListView):
+    model = Person
+    template_name = "person/list.html"
+    paginate_by = 20
+
+    def get_queryset(self):
+        queryset = Person.objects.order_by('-update_date')
+        if self.request.GET.get('query') is not None:
+            for query in re.split('[\s　]', self.request.GET.get('query')):
+                queryset = queryset.filter(Q(name__icontains=query)|Q(search_name__icontains=query))
+        return queryset
+
 class PersonDetail(DetailView):
     model = Person
     template_name = "person/detail.html"

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>担当者一覧</h1>
+
+{% load customer_extras %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">氏名</th>
+      <th scope="col">会社 / 部署</th>
+      <th scope="col">電話 / FAX</th>
+      <th scope="col">メールアドレス</th>
+      <th scope="col">住所</th>
+      <th scope="col">備考</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for person in object_list %}
+    <tr>
+      <th scope="row"><a href="{% url 'customers:person_update' person.id %}">編集</a></th>
+      <th scope="col"><a href="{% url 'customers:person_detail' person.id %}">{{ person.name }}</a></th>
+      <th scope="col"><a href="{% url 'customers:company_detail' person.company.id %}">{{ person.company.name }}</a></th>
+      <th scope="col">
+        <div>{{ person.telephone_number_1 |default_if_none:"" }}</div>
+        <div>{{ person.telephone_number_2 |default_if_none:"" }}</div>
+        <div>{{ person.fax_number |default_if_none:"" }}</div>
+      </th>
+      <th scope="col"><p>{{ person.mail_address |default_if_none:"" }}</p></th>
+      <th scope="col">
+        <div>{{ person.zip_code |default_if_none:"" }}</div>
+        <div>{{ person.address_1 |default_if_none:"" }}</div>
+        <div>{{ person.address_2 |default_if_none:"" }}</div>
+        <div>{{ person.address_3 |default_if_none:"" |linebreaksbr }}</div>
+      </th>
+      <th scope="col">{{ person.note |truncatechars_html:80 |linebreaksbr }}</th>
+    </tr>
+{% endfor %}
+  </tbody>
+</body>
+
+
+
+
+
+
+
+
+{% if page_obj.has_previous %}
+  <a href="?{% query_transform request page=page_obj.previous_page_number %}">前へ</a>
+{% else %}
+  <span>前へ</span>
+{% endif %}
+
+{% if page_obj.has_next %}
+  <a href="?{% query_transform request page=page_obj.next_page_number %}">次へ</a>
+{% else %}
+  <span>次へ</span>
+{% endif %}
+
+<br>
+
+<form action="{{ request.path_info }}" method="GET">
+  <input name="query" value="{{ request.GET.query }}">
+  <input type="submit" value="検索">
+</form>
+{% endblock %}

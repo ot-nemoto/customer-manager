@@ -12,9 +12,6 @@ app_name = 'customers'
 urlpatterns = [
     path('', views.index, name="index"),
 
-    #path('companies/', views.companies, name="companies"),
-    path('persons/', views.persons, name="persons"),
-
     path('companies/', views.CompanyList.as_view(), name='company_list'),
     path('companies/<int:index_name>/', views.CompanyList.as_view(), name='company_list'),
     path('company/', views.CompanyCreate.as_view(), name='company_create'),
@@ -25,6 +22,7 @@ urlpatterns = [
     path('section/<int:pk>/', views.SectionDetail.as_view(), name='section_detail'),
     path('section/<int:pk>/edit/', views.SectionUpdate.as_view(), name='section_update'),
 
+    path('persons/', views.PersonList.as_view(), name="person_list"),
     path('person/', views.PersonCreate.as_view(), name='person_create'),
     path('person/<int:pk>/', views.PersonDetail.as_view(), name='person_detail'),
     path('person/<int:pk>/edit/', views.PersonUpdate.as_view(), name='person_update'),
